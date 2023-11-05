@@ -1,0 +1,99 @@
+<section
+  class="flex justify-around max-w-screen w-full gap-5 p-5 max-h[340px] h-full mb-5"
+>
+  <div class="text-center w-full max-w-[33%]">
+    <div
+      *ngIf="selectedPerson"
+      class="flex flex-col gap-3 max-w-sm rounded overflow-hidden shadow-lg p-3"
+    >
+      <h2>Person</h2>
+
+      <span>ID: {{ selectedPerson.id }}</span>
+      <span>Person name: {{ selectedPerson.name }}</span>
+      <span>Balance: {{ selectedPerson.balance }}</span>
+      <span>Total debts: {{ selectedPerson.debt }}</span>
+      <span>Transaction count: {{ selectedPerson.transactions.length }}</span>
+    </div>
+  </div>
+
+  <form
+    class="flex flex-col w-full text-center max-w-[33%]"
+    [formGroup]="transactionForm"
+  >
+    <mat-form-field>
+      <mat-label for="personId">Choose a person:</mat-label>
+      <mat-select formControlName="personId">
+        <mat-option
+          *ngFor="let person of persons"
+          [value]="person.id"
+          (click)="onPersonSelectionChange(person.id)"
+        >
+          {{ person.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label for="bankId">Choose a bank:</mat-label>
+      <mat-select formControlName="bankId">
+        <mat-option
+          *ngFor="let bank of banks"
+          [value]="bank.id"
+          (click)="onBankSelectionChange(bank.id)"
+        >
+          {{ bank.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always">
+      <mat-label for="amount">Amount</mat-label>
+      <input
+        matInput
+        type="number"
+        class="example-right-align"
+        placeholder="0"
+        formControlName="amount"
+      />
+      <span matTextPrefix>$&nbsp;</span>
+      <span matTextSuffix>.00</span>
+    </mat-form-field>
+    <button
+      mat-raised-button
+      [disabled]="transactionForm.invalid"
+      (click)="createTransaction()"
+    >
+      Create transaction
+    </button>
+  </form>
+
+  <div class="text-center w-full max-w-[33%]">
+    <div
+      *ngIf="selectedBank"
+      class="flex flex-col gap-3 max-w-sm rounded overflow-hidden shadow-lg p-3"
+    >
+      <span>Bank</span>
+      <span>ID: {{ selectedBank.id }}</span>
+      <span>Bank name: {{ selectedBank.name }}</span>
+      <span
+        >Pending transactions count:
+        {{ selectedBank.transactionsPending.length }}</span
+      >
+      <span
+        >Approved transactions count:
+        {{ selectedBank.transactionsApproved.length }}</span
+      >
+      <span
+        >Closed transactions count:
+        {{ selectedBank.transactionsClosed.length }}</span
+      >
+      <span
+        >All Transactions count:
+        {{
+          selectedBank.transactionsApproved.length +
+            selectedBank.transactionsClosed.length +
+            selectedBank.transactionsPending.length
+        }}</span
+      >
+    </div>
+  </div>
+</section>

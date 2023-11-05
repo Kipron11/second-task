@@ -1,0 +1,12 @@
+<section class="flex flex-col justify-center items-center text-center">
+  <h1>TOP Rating</h1>
+
+
+  <br>
+  PERSONS
+  <div *ngFor="let person of persons">{{person.name}} {{person.debt}}</div>
+  <br>
+
+  BANKS
+  <div *ngFor="let bank of banks">{{bank.name}} {{bank.totalDebt}}</div>
+</section>

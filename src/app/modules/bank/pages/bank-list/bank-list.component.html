@@ -1,0 +1,13 @@
+<section class="flex w-full justify-center gap-5 items-center">
+  <div
+    class="border rounded-lg p-5 flex flex-col text-center items-center cursor-pointer"
+    *ngFor="let bank of banks"
+    (click)="openBankDetails(bank.id)"
+  >
+    <div class="h-[50px] w-[50px] rounded-[50%] bg-[lightgreen]"></div>
+
+    <p class="mt-5">
+      {{ bank.name }}
+    </p>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+<section class="flex w-full justify-center gap-5 items-center">
+  <div
+    class="border rounded-lg p-5 flex flex-col text-center items-center cursor-pointer"
+    *ngFor="let person of persons"
+    (click)="openPersonDetails(person.id)"
+  >
+    <div class="h-[50px] w-[50px] rounded-[50%] bg-[lightgreen]"></div>
+
+    <p class="mt-5">
+      {{ person.name }}
+    </p>
+  </div>
+</section>
