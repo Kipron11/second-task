@@ -1,7 +1,13 @@
 <section>
   <nav class="flex justify-around gap-3">
     <ng-container *ngFor="let link of links">
-      <div class="cursor-pointer" routerLinkActive="active-link" [routerLink]="[link.route]">{{ link.label }}</div>
+      <div
+        class="cursor-pointer"
+        routerLinkActive="active-link"
+        [routerLink]="[link.route]"
+      >
+        {{ link.label }}
+      </div>
     </ng-container>
   </nav>
 </section>

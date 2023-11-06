@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BANKS, Bank } from 'src/app/core/data';
+import { Bank } from 'src/app/core/data';
 
 @Injectable({
   providedIn: 'root',

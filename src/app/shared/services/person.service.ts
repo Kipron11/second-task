@@ -1,5 +1,5 @@
-import { Injectable, OnInit } from '@angular/core';
-import { PERSONS, Person } from 'src/app/core/data';
+import { Injectable } from '@angular/core';
+import { Person } from 'src/app/core/data';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +28,6 @@ export class PersonService {
     return this.parsePersonsFromStorage().find(
       (person) => person.id == id
     ) as Person;
-
   }
 
   findPersonNameById(id: number): string {

@@ -57,7 +57,7 @@ export enum TransactionStatus {
   PENDING = 'Pending',
 }
 
-//Initial data
+// Initial data
 export const PERSONS: Person[] = [
   new Person(1, 'Zvirbulis'),
   new Person(2, 'Ņikita'),
@@ -66,7 +66,7 @@ export const PERSONS: Person[] = [
   new Person(5, 'Godu Kvass'),
 ];
 
-//Initial data
+// Initial data
 export const BANKS: Bank[] = [
   new Bank(1, 'Swedbank'),
   new Bank(2, 'Seb'),

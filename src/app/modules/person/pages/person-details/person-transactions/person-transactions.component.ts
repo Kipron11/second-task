@@ -9,25 +9,29 @@ import { TransactionService } from 'src/app/shared/services/transaction.service'
   templateUrl: './person-transactions.component.html',
 })
 export class PersonTransactionsComponent implements OnInit {
-
-  @Input({required: true}) transactions!:Transaction[]
+  @Input({ required: true }) transactions!: Transaction[];
   displayedColumns: string[] = ['id', 'person', 'bank', 'amount', 'status'];
 
   transactionStatuses = TransactionStatus;
 
-  constructor( private readonly transactionService: TransactionService,
+  constructor(
+    private readonly transactionService: TransactionService,
     private readonly personsService: PersonService,
-    private readonly banksService: BankService ){}
+    private readonly banksService: BankService
+  ) {}
 
   ngOnInit(): void {
-    this.transactions.sort((a, b) => a.status.localeCompare(b.status))
+    this.transactions.sort((a, b) => a.status.localeCompare(b.status));
   }
 
-  closeTransaction(element:Transaction){
+  closeTransaction(element: Transaction) {
     if (element.status == TransactionStatus.APPROVED) {
       element.status = TransactionStatus.CLOSED;
-      
-      this.transactionService.processTransaction(element, TransactionStatus.CLOSED);
+
+      this.transactionService.processTransaction(
+        element,
+        TransactionStatus.CLOSED
+      );
     }
   }
 

@@ -8,17 +8,19 @@ import { PersonService } from 'src/app/shared/services/person.service';
   selector: 'app-person-list',
   templateUrl: './person-list.component.html',
 })
-
 export class PersonListComponent implements OnInit {
   persons: Person[] = [];
 
-  constructor(private readonly personService: PersonService, private readonly router:Router) {}
+  constructor(
+    private readonly personService: PersonService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.persons = this.personService.getPersons();
   }
 
-  openPersonDetails(id:number){
-    this.router.navigate([`/${ROUTES.PERSON}/` + id])
+  openPersonDetails(id: number) {
+    this.router.navigate([`/${ROUTES.PERSON}/` + id]);
   }
 }

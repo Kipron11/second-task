@@ -6,18 +6,21 @@ import { BankService } from 'src/app/shared/services/bank.service';
 
 @Component({
   selector: 'app-bank-list',
-  templateUrl: './bank-list.component.html'
+  templateUrl: './bank-list.component.html',
 })
 export class BankListComponent {
   banks: Bank[] = [];
 
-  constructor(private readonly bankService: BankService, private readonly router:Router) {}
+  constructor(
+    private readonly bankService: BankService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.banks = this.bankService.getBanks();
   }
 
-  openBankDetails(id:number){
-    this.router.navigate([`/${ROUTES.BANK}/` + id])
+  openBankDetails(id: number) {
+    this.router.navigate([`/${ROUTES.BANK}/` + id]);
   }
 }

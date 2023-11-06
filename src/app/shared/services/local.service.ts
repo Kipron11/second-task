@@ -12,20 +12,23 @@ export class LocalService {
     private readonly bankService: BankService
   ) {}
   setLocalStorage(currentTransactions: Transaction[]): void {
-    let serializedData: {persons:Person[], banks:Bank[], transactions:Transaction[]}
+    let serializedData: {
+      persons: Person[];
+      banks: Bank[];
+      transactions: Transaction[];
+    };
     const personsJson = localStorage.getItem('persons');
     const banksJson = localStorage.getItem('banks');
 
     if (personsJson && banksJson) {
       serializedData = {
-        persons: this.personService.getPersons().map((person)=>({
+        persons: this.personService.getPersons().map((person) => ({
           id: person.id,
           name: person.name,
           balance: person.balance,
           debt: person.debt,
           transactions: person.transactions,
-        }))
-        ,
+        })),
         banks: this.bankService.getBanks().map((bank) => ({
           id: bank.id,
           name: bank.name,
@@ -33,7 +36,7 @@ export class LocalService {
           transactionsPending: bank.transactionsPending,
           transactionsClosed: bank.transactionsClosed,
         })),
-  
+
         transactions: currentTransactions.map((transaction) => ({
           id: transaction.id,
           personId: transaction.personId,
@@ -44,14 +47,23 @@ export class LocalService {
       };
     } else {
       serializedData = {
-      persons: PERSONS,
-      banks: BANKS,
-      transactions: currentTransactions,
-    };
+        persons: PERSONS,
+        banks: BANKS,
+        transactions: currentTransactions,
+      };
     }
 
-    localStorage.setItem('banks', JSON.stringify(serializedData.banks));
-    localStorage.setItem('persons', JSON.stringify(serializedData.persons));
-    localStorage.setItem('transactions', JSON.stringify(serializedData.transactions));
+    this.setItemsInLocalStorage(serializedData);
+  }
+
+  setItemsInLocalStorage(serializedData: {
+    [x: string]: any;
+    persons: Person[];
+    banks: Bank[];
+    transactions: Transaction[];
+  }) {
+    for (const key in serializedData) {
+      localStorage.setItem(key, JSON.stringify(serializedData[key]));
+    }
   }
 }

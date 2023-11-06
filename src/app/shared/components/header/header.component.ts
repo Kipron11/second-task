@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ROUTES } from '../../routes';
 
 @Component({
   selector: 'app-header',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   currentTime: Date = new Date();
+  routes = ROUTES;
 
   ngOnInit(): void {
     setInterval(() => {

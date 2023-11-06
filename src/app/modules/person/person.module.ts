@@ -7,7 +7,11 @@ import { MatTableModule } from '@angular/material/table';
 import { PersonTransactionsComponent } from './pages/person-details/person-transactions/person-transactions.component';
 
 @NgModule({
-  declarations: [PersonListComponent, PersonDetailsComponent, PersonTransactionsComponent],
+  declarations: [
+    PersonListComponent,
+    PersonDetailsComponent,
+    PersonTransactionsComponent,
+  ],
   imports: [PersonRoutingModule, CommonModule, MatTableModule],
 })
 export class PersonModule {}

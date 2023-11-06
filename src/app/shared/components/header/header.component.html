@@ -1,11 +1,15 @@
 <header class="min-h-[60px] flex flex-col justify-center p-4">
   <nav class="flex justify-between items-center">
-    <div [routerLink]="['transactions']">
-      <img class="cursor-pointer" src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png" alt="Logo" width="50" height="50" >
+    <div [routerLink]="[routes.TRANSACTIONS]">
+      <img
+        class="cursor-pointer"
+        src="https://www.adaptivewfs.com/wp-content/uploads/2020/07/logo-placeholder-image.png"
+        alt="Logo"
+        width="50"
+        height="50"
+      />
     </div>
     <app-navigation />
-    <div>{{currentTime | date:"dd.MM.yyyy hh:mm:ss "}}</div>
+    <div>{{ currentTime | date : "dd.MM.yyyy hh:mm:ss " }}</div>
   </nav>
 </header>
-
-

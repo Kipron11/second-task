@@ -17,7 +17,9 @@ export class RatingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.persons = this.personService.getPersons().filter((person) => person.debt > 0);
+    this.persons = this.personService
+      .getPersons()
+      .filter((person) => person.debt > 0);
 
     this.bankService.getBanks().forEach((bank) => {
       let totalAmount: number = 0;
