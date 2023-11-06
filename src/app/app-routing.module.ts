@@ -1,26 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ROUTES } from './shared/routes';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo:'transactions',
+    redirectTo: ROUTES.TRANSACTIONS,
     pathMatch:'full'
   },
   {
-    path: 'transactions',
+    path: ROUTES.TRANSACTIONS,
     loadChildren: () => import('./modules/transaction/transaction.module').then((m) => m.TransactionModule),
   },
   {
-    path: 'person',
+    path: ROUTES.PERSON,
     loadChildren: () => import('./modules/person/person.module').then((m) => m.PersonModule),
   },
   {
-    path: 'bank',
+    path: ROUTES.BANK,
     loadChildren: () => import('./modules/bank/bank.module').then((m) => m.BankModule),
   },
   {
-    path: 'rating',
+    path: ROUTES.RATING,
     loadChildren: () => import('./modules/rating/rating.module').then((m) => m.RatingModule),
   },
 ];

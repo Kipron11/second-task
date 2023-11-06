@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BankDetailsComponent } from './pages/bank-details/bank-details.component';
 import { BankListComponent } from './pages/bank-list/bank-list.component';
+import { ROUTES } from 'src/app/shared/routes';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'list',
+    redirectTo: ROUTES.LIST,
     pathMatch: 'full',
   },
   {
-    path: 'list',
+    path: ROUTES.LIST,
     component: BankListComponent,
   },
   {

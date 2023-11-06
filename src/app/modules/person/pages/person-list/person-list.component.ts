@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Person } from 'src/app/core/data';
+import { ROUTES } from 'src/app/shared/routes';
 import { PersonService } from 'src/app/shared/services/person.service';
 
 @Component({
@@ -18,6 +19,6 @@ export class PersonListComponent implements OnInit {
   }
 
   openPersonDetails(id:number){
-    this.router.navigate(['/person/' + id])
+    this.router.navigate([`/${ROUTES.PERSON}/` + id])
   }
 }

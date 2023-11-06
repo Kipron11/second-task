@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ROUTES } from 'src/app/shared/routes';
 
 @Component({
   selector: 'app-navigation',
@@ -7,9 +8,9 @@ import { Component } from '@angular/core';
 })
 export class NavigationComponent {
   links: { route: string; label: string }[] = [
-    { route: 'transactions', label: 'Transactions' },
-    { route: 'person', label: 'Persons' },
-    { route: 'bank', label: 'Banks' },
-    { route: 'rating', label: 'Rating' },
+    { route: ROUTES.TRANSACTIONS, label: 'Transactions' },
+    { route: ROUTES.PERSON, label: 'Persons' },
+    { route: ROUTES.BANK, label: 'Banks' },
+    { route: ROUTES.RATING, label: 'Rating' },
   ];
 }

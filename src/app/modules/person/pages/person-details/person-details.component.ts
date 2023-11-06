@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Person } from 'src/app/core/data';
+import { ROUTES } from 'src/app/shared/routes';
 import { PersonService } from 'src/app/shared/services/person.service';
 
 @Component({
@@ -23,6 +24,6 @@ export class PersonDetailsComponent {
   }
 
   backToList() {
-    this.router.navigate(['person/list']);
+    this.router.navigate([`${ROUTES.PERSON}/${ROUTES.LIST}`]);
   }
 }

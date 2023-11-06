@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Bank } from 'src/app/core/data';
+import { ROUTES } from 'src/app/shared/routes';
 import { BankService } from 'src/app/shared/services/bank.service';
 
 @Component({
@@ -23,6 +24,6 @@ export class BankDetailsComponent {
   }
 
   backToList() {
-    this.router.navigate(['bank/list']);
+    this.router.navigate([`${ROUTES.BANK}/${ROUTES.LIST}`]);
   }
 }
