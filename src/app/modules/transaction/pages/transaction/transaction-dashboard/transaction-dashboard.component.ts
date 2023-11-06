@@ -1,10 +1,13 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Transaction, TransactionStatus } from 'src/app/core/data';
+import {
+  Bank,
+  Person,
+  Transaction,
+  TransactionStatus,
+} from 'src/app/core/data';
+import { BankService } from 'src/app/shared/services/bank.service';
+import { PersonService } from 'src/app/shared/services/person.service';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
 
 @Component({
@@ -16,17 +19,28 @@ export class TransactionDashboardComponent implements OnInit, OnDestroy {
   pendingTransactions: Transaction[] = [];
   approvedTransactions: Transaction[] = [];
   transactionStatuses = TransactionStatus;
-  private transactionSubscription!: Subscription;
 
-  constructor(private readonly transactionService: TransactionService) {}
+  persons: Person[] = this.personsService.getPersons();
+  banks: Bank[] = this.banksService.getBanks();
+
+  private transactionSubscription!: Subscription;
+  private personsSubscription!: Subscription;
+  private banksSubscription!: Subscription;
+
+  constructor(
+    private readonly transactionService: TransactionService,
+    private readonly personsService: PersonService,
+    private readonly banksService: BankService
+  ) {}
 
   ngOnInit(): void {
     this.transactionSubscription =
       this.transactionService.transactions$.subscribe((transactions) => {
         this.transactions = transactions;
-        this.pendingTransactions = this.transactionService.getTransactionsByStatus(
-          this.transactionStatuses.PENDING
-        );
+        this.pendingTransactions =
+          this.transactionService.getTransactionsByStatus(
+            this.transactionStatuses.PENDING
+          );
         this.approvedTransactions =
           this.transactionService.getTransactionsByStatus(
             this.transactionStatuses.APPROVED
@@ -36,9 +50,25 @@ export class TransactionDashboardComponent implements OnInit, OnDestroy {
         this.pendingTransactions = [...this.pendingTransactions];
         this.approvedTransactions = [...this.approvedTransactions];
       });
+
+    this.personsSubscription = this.transactionService.persons$.subscribe(
+      (persons) => {
+        this.persons = persons;
+        this.persons = [...this.persons];
+      }
+    );
+
+    this.banksSubscription = this.transactionService.banks$.subscribe(
+      (banks) => {
+        this.banks = banks;
+        this.banks = [...this.banks];
+      }
+    );
   }
 
   ngOnDestroy(): void {
     this.transactionSubscription.unsubscribe();
+    this.personsSubscription.unsubscribe();
+    this.banksSubscription.unsubscribe();
   }
 }

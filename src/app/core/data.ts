@@ -1,22 +1,21 @@
 // Parāda informācija
 export class Transaction {
-  static idCounter = 1;
-
   id: number;
-  person: Person;
-  bank: Bank;
+  personId: number;
+  bankId: number;
   amount: number;
   status: TransactionStatus;
 
   constructor(
+    id: number,
     person: Person,
     bank: Bank,
     amount: number,
     status: TransactionStatus
   ) {
-    this.id = Transaction.idCounter++;
-    this.person = person;
-    this.bank = bank;
+    this.id = id;
+    this.personId = person.id;
+    this.bankId = bank.id;
     this.amount = amount ?? 0;
     this.status = status;
   }
@@ -28,14 +27,13 @@ export class Person {
   name: string;
   balance: number;
   debt: number;
-  transactions: Transaction[];
+  transactions: Transaction[] = [];
 
-  constructor(id: number, name: string, transactions: Transaction[]) {
+  constructor(id: number, name: string) {
     this.id = id;
     this.name = name;
     this.balance = 300;
     this.debt = 0;
-    this.transactions = transactions;
   }
 }
 
@@ -43,22 +41,13 @@ export class Person {
 export class Bank {
   id: number;
   name: string;
-  transactionsApproved: Transaction[];
-  transactionsPending: Transaction[];
-  transactionsClosed: Transaction[];
+  transactionsApproved: Transaction[] = [];
+  transactionsPending: Transaction[] = [];
+  transactionsClosed: Transaction[] = [];
 
-  constructor(
-    id: number,
-    name: string,
-    transactionsApproved: Transaction[],
-    transactionsPending: Transaction[],
-    transactionsClosed: Transaction[]
-  ) {
+  constructor(id: number, name: string) {
     this.id = id;
     this.name = name;
-    this.transactionsApproved = transactionsApproved;
-    this.transactionsPending = transactionsPending;
-    this.transactionsClosed = transactionsClosed;
   }
 }
 
@@ -68,18 +57,20 @@ export enum TransactionStatus {
   PENDING = 'Pending',
 }
 
-export const PERSONS = [
-  new Person(1, 'Zvirbulis', []),
-  new Person(2, 'Ņikita', []),
-  new Person(3, 'Spiderman', []),
-  new Person(4, 'Rexona Men', []),
-  new Person(5, 'Godu Kvass', []),
+//Initial data
+export const PERSONS: Person[] = [
+  new Person(1, 'Zvirbulis'),
+  new Person(2, 'Ņikita'),
+  new Person(3, 'Spiderman'),
+  new Person(4, 'Rexona Men'),
+  new Person(5, 'Godu Kvass'),
 ];
 
-export const BANKS = [
-  new Bank(1, 'Swedbank', [],[], []),
-  new Bank(2, 'Seb', [],[], []),
-  new Bank(3, 'Citadele', [],[], []),
-  new Bank(4, 'Credit', [],[], []),
-  new Bank(5, 'Paypal', [],[], []),
+//Initial data
+export const BANKS: Bank[] = [
+  new Bank(1, 'Swedbank'),
+  new Bank(2, 'Seb'),
+  new Bank(3, 'Citadele'),
+  new Bank(4, 'Credit'),
+  new Bank(5, 'Paypal'),
 ];

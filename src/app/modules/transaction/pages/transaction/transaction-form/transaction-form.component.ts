@@ -12,7 +12,7 @@ import { TransactionService } from 'src/app/shared/services/transaction.service'
 
 @Component({
   selector: 'app-transaction-form',
-  templateUrl: './transaction-form.component.html'
+  templateUrl: './transaction-form.component.html',
 })
 export class TransactionFormComponent {
   persons!: Person[];
@@ -43,8 +43,10 @@ export class TransactionFormComponent {
     const person: Person = this.personService.findPersonById(personId);
     const bank: Bank = this.bankService.findBankById(bankId);
     const transactionStatus = TransactionStatus.PENDING;
+    const transactionsLength = this.transactionService.getTransactionsLength();
 
     const transaction: Transaction = new Transaction(
+      transactionsLength,
       person,
       bank,
       amount,
@@ -53,8 +55,12 @@ export class TransactionFormComponent {
 
     person.transactions.push(transaction);
     bank.transactionsPending.push(transaction);
+
+    this.personService.updatedPersonsInLocalStorage(person);
+    this.bankService.updatedBanksInLocalStorage(bank);
     this.transactionService.setTransaction(transaction);
-    this.transactionForm.reset()
+
+    this.transactionForm.reset();
   }
 
   onPersonSelectionChange(id: number) {
