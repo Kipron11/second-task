@@ -4,6 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    redirectTo:'transactions',
+    pathMatch:'full'
+  },
+  {
+    path: 'transactions',
     loadChildren: () => import('./modules/transaction/transaction.module').then((m) => m.TransactionModule),
   },
   {

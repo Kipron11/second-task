@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Transaction, TransactionStatus } from 'src/app/core/data';
+import { BankService } from 'src/app/shared/services/bank.service';
+import { PersonService } from 'src/app/shared/services/person.service';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class PersonTransactionsComponent implements OnInit {
 
   transactionStatuses = TransactionStatus;
 
-  constructor(private readonly transactionService:TransactionService){}
+  constructor( private readonly transactionService: TransactionService,
+    private readonly personsService: PersonService,
+    private readonly banksService: BankService ){}
 
   ngOnInit(): void {
     this.transactions.sort((a, b) => a.status.localeCompare(b.status))
@@ -25,5 +29,13 @@ export class PersonTransactionsComponent implements OnInit {
       
       this.transactionService.processTransaction(element, TransactionStatus.CLOSED);
     }
+  }
+
+  findPersonNameById(id: number) {
+    return this.personsService.findPersonNameById(id);
+  }
+
+  findBankNameById(id: number) {
+    return this.banksService.findBankNameById(id);
   }
 }

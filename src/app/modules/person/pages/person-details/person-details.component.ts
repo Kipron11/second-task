@@ -7,7 +7,6 @@ import { PersonService } from 'src/app/shared/services/person.service';
   selector: 'app-person-details',
   templateUrl: './person-details.component.html',
 })
-
 export class PersonDetailsComponent {
   id!: number;
   person!: Person;
@@ -20,6 +19,7 @@ export class PersonDetailsComponent {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.person = this.personService.findPersonById(this.id);
+    const statusOrder = { Approved: 1, Pending: 2, Closed: 3 };
   }
 
   backToList() {

@@ -28,6 +28,7 @@ export class PersonService {
     return this.parsePersonsFromStorage().find(
       (person) => person.id == id
     ) as Person;
+
   }
 
   findPersonNameById(id: number): string {

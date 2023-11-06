@@ -28,8 +28,9 @@ export class TransactionService {
 
   currentPersons = this.personsSubject.value;
   persons$ = this.personsSubject.asObservable();
-  banks$ = this.banksSubject.asObservable();
+
   currentBanks = this.banksSubject.value;
+  banks$ = this.banksSubject.asObservable();
 
   currentTransactions = this.transactionsSubject.value;
   transactions$ = this.transactionsSubject.asObservable();
@@ -46,6 +47,7 @@ export class TransactionService {
     const person = this.personService.findPersonById(transaction.personId);
     const bank = this.bankService.findBankById(transaction.bankId);
     this.notifyTransactionChange();
+
     this.bankService.updatedBanksInLocalStorage(bank);
     this.personService.updatedPersonsInLocalStorage(person);
     this.localService.setLocalStorage(this.currentTransactions);
@@ -65,6 +67,11 @@ export class TransactionService {
     if (status === TransactionStatus.APPROVED) {
       person.balance += transaction.amount;
       person.debt += transaction.amount;
+      person.transactions.find((item) => {
+        if (item.id == transaction.id) {
+          item.status = transaction.status;
+        }
+      });
       bank.transactionsApproved.push(transaction);
       bank.transactionsPending = bank.transactionsPending.filter(
         (item) => item.id !== id
@@ -72,21 +79,29 @@ export class TransactionService {
     } else if (status === TransactionStatus.CLOSED) {
       person.balance -= transaction.amount;
       person.debt -= transaction.amount;
+      person.transactions.find((item) => {
+        if (item.id == transaction.id) {
+          item.status = transaction.status;
+        }
+      });
+      this.currentTransactions.find((item) => {
+        if (item.id == transaction.id) {
+          item.status = transaction.status;
+        }
+      });
       bank.transactionsClosed.push(transaction);
       bank.transactionsApproved = bank.transactionsApproved.filter(
         (item) => item.id !== id
       );
     }
 
-    this.notifyTransactionChange();
     this.bankService.updatedBanksInLocalStorage(bank);
     this.personService.updatedPersonsInLocalStorage(person);
-    console.log(person);
     this.localService.setLocalStorage(this.currentTransactions);
+    this.notifyTransactionChange();
   }
 
   getTransactionsLength() {
-    console.log(this.currentTransactions.length);
     return this.currentTransactions.length;
   }
 
@@ -98,7 +113,6 @@ export class TransactionService {
 
   private getTransactionsFromLocalStorage() {
     const dataJson = localStorage.getItem('transactions');
-    if (dataJson) console.log(JSON.parse(dataJson));
     return dataJson ? (JSON.parse(dataJson) as Transaction[]) : [];
   }
 }

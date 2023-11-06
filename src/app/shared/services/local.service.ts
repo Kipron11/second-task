@@ -1,6 +1,5 @@
-import { Inject, Injectable, forwardRef } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BANKS, Bank, PERSONS, Person, Transaction } from 'src/app/core/data';
-import { TransactionService } from './transaction.service';
 import { PersonService } from './person.service';
 import { BankService } from './bank.service';
 
@@ -43,16 +42,7 @@ export class LocalService {
           status: transaction.status,
         })),
       };
-      console.log(
-        serializedData.banks,
-        'banksEDIT',
-        serializedData.persons,
-        'personsEDIT',
-        serializedData.transactions,
-        'transEDIT'
-      );
     } else {
-      console.log('INITAL')
       serializedData = {
       persons: PERSONS,
       banks: BANKS,
@@ -60,14 +50,6 @@ export class LocalService {
     };
     }
 
-    console.log(
-      serializedData.banks,
-      'banks',
-      serializedData.persons,
-      'persons',
-      serializedData.transactions,
-      'trans'
-    );
     localStorage.setItem('banks', JSON.stringify(serializedData.banks));
     localStorage.setItem('persons', JSON.stringify(serializedData.persons));
     localStorage.setItem('transactions', JSON.stringify(serializedData.transactions));
