@@ -1,27 +1,15 @@
 # SecondTask
+Tas ir administrātora lietotne, kurā jūs varat veikt darbības, piemēram, veikt transakcijas starp cilvēkiem un bankām, apstiprināt tās un sekot tās statusam. Turklāt jūs varat identificēt lielākos aizdevējus un parādniekus. Lietotnē ir arī iespēja atmaksāt kredītu no klienta puses.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.8.
+## Setup
+Lai palaist applikāciju lokāli ir nepieciešams:
 
-## Development server
+Noklonēt repozitoriju - `git clone 'Projekta saite'`
+Uzstādīt nepieciešamās bibliotēkas - `npm install`
+Palaišana projekta - `npm run start` vai `ng serve`
+Apmeklējiet lapu: `http://localhost:4200/`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Data
+Visa informācija tiek glabāta vietējā pārlūkprogrammas krātuvē, tāpēc visu darbību ar datiem varat pārbaudīt šādi:
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Iet uz: Inspect -> Application -> Local Storage -> localhost:4200
